@@ -7,7 +7,7 @@ import {
 } from '@ant-design/pro-components';
 import type { InputRef } from 'antd';
 import { set } from 'lodash';
-import { getServiceTypeOptions } from '@/base/api/orders';
+import { getServiceTypeOptions } from '@/base/api/user';
 import type { RequestSelectProps } from '@/base/components/request-select';
 import { RequestSelect } from '@/base/components/request-select';
 

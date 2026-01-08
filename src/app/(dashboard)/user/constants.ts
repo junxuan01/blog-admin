@@ -1,4 +1,4 @@
-import { OrderStatus } from '@api/orders/types';
+import { OrderStatus } from '@/base/api/user/types';
 
 /**
  * Order 状态筛选项配置

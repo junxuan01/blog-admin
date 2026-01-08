@@ -1,8 +1,6 @@
 'use client';
 
 import { CopyOutlined, DownloadOutlined, EyeOutlined } from '@ant-design/icons';
-import { getOrders } from '@api/orders';
-import type { OrderListItem } from '@api/orders/types';
 import BaseTable, {
   type BaseTableActionType,
   type BaseTableSearchForm,
@@ -14,6 +12,8 @@ import { App, Button, Flex, Space, Tooltip } from 'antd';
 import dayjs from 'dayjs';
 import Link from 'next/link';
 import { useRef } from 'react';
+import { getOrders } from '@/base/api/user';
+import type { OrderListItem } from '@/base/api/user/types';
 
 export default function OrdersPage() {
   const actionRef = useRef<BaseTableActionType>(undefined);
