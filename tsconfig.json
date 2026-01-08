@@ -19,7 +19,20 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      // Base 层别名 - 共享资源
+      "@api/*": ["./src/base/api/*"],
+      "@assets/*": ["./src/base/assets/*"],
+      "@components/*": ["./src/base/components/*"],
+      "@const/*": ["./src/base/const/*"],
+      "@hooks/*": ["./src/base/hooks/*"],
+      "@providers/*": ["./src/base/provider/*"],
+      "@stores/*": ["./src/base/stores/*"],
+      "@utils/*": ["./src/base/utils/*"],
+      "@clients/*": ["./src/base/clients/*"],
+      "@hoc/*": ["./src/base/hoc/*"],
+      // App 层别名 - 页面模块
+      "@app/*": ["./src/app/(dashboard)/*"]
     }
   },
   "include": [

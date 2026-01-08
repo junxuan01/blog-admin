@@ -1,0 +1,10 @@
+.map-view-wrap {
+  line-height: 130%;
+  letter-spacing: -0.14px;
+}
+
+.map-wrap {
+  border-radius: 12px;
+  overflow: hidden;
+  aspect-ratio: 1;
+}
