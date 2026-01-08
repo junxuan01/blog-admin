@@ -51,11 +51,6 @@ import {
   LyloProSearchTransformCreator,
   LyloProSearchValueType,
 } from './components/LyloProSearch';
-import {
-  LyloProServiceTypeSelectRenderConfig,
-  LyloProServiceTypeSelectTransformCreator,
-  LyloProServiceTypeSelectValueType,
-} from './components/LyloProServiceTypeSelect';
 
 export type CusProComponentsPureType =
   | typeof ProDemoFieldValueType
@@ -64,7 +59,6 @@ export type CusProComponentsPureType =
   | typeof LyloProDictionarySelectValueType
   | typeof LyloProRequestSelectValueType
   | typeof LyloProCarTypeSelectValueType
-  | typeof LyloProServiceTypeSelectValueType
   | typeof LyloProOrderSourceSelectValueType
   | typeof LyloProOrderPaymentStatusSelectValueType
   | typeof LyloPhoneValueType;
@@ -87,7 +81,6 @@ const placeholderMap: Partial<Record<CusProComponentsType, string | string[]>> =
     [LyloProDictionarySelectValueType]: 'Please Select',
     [LyloProRequestSelectValueType]: 'Please Select',
     [LyloProCarTypeSelectValueType]: 'Please Select',
-    [LyloProServiceTypeSelectValueType]: 'Please Select',
     [LyloProOrderSourceSelectValueType]: 'Please Select',
     [LyloProOrderPaymentStatusSelectValueType]: 'Please Select',
     [LyloPhoneValueType]: 'Please enter phone number',
@@ -117,7 +110,6 @@ export const transformMap: Partial<
   [LyloProDictionarySelectValueType]: LyloProDictionarySelectTransformCreator,
   [LyloProRequestSelectValueType]: LyloProRequestSelectTransformCreator,
   [LyloProCarTypeSelectValueType]: LyloProCarTypeSelectTransformCreator,
-  [LyloProServiceTypeSelectValueType]: LyloProServiceTypeSelectTransformCreator,
   [LyloProOrderSourceSelectValueType]: LyloProOrderSourceSelectTransformCreator,
   [LyloProOrderPaymentStatusSelectValueType]:
     LyloProOrderPaymentStatusSelectTransformCreator,
@@ -137,7 +129,6 @@ export const valueTypeMap: Record<
   [LyloProDictionarySelectValueType]: LyloProDictionarySelectRenderConfig,
   [LyloProRequestSelectValueType]: LyloProRequestSelectRenderConfig,
   [LyloProCarTypeSelectValueType]: LyloProCarTypeSelectRenderConfig,
-  [LyloProServiceTypeSelectValueType]: LyloProServiceTypeSelectRenderConfig,
   [LyloProOrderSourceSelectValueType]: LyloProOrderSourceSelectRenderConfig,
   [LyloProOrderPaymentStatusSelectValueType]:
     LyloProOrderPaymentStatusSelectRenderConfig,
@@ -154,4 +145,3 @@ export { LyloProOrderPaymentStatusSelect } from './components/LyloProOrderPaymen
 export { LyloProOrderSourceSelect } from './components/LyloProOrderSourceSelect';
 export { LyloProRequestSelect } from './components/LyloProRequestSelect';
 export { LyloProSearch } from './components/LyloProSearch';
-export { LyloProServiceTypeSelect } from './components/LyloProServiceTypeSelect';
