@@ -1,39 +1,41 @@
-import authService from '@clients/auth';
-// import { logger } from '@utils/logger';
-import type { ILogin, LoginResponse, UserInfo } from './type';
+import blogService from '@clients/blog';
+import type { ILogin, IRegister, LoginResponse, UserInfo } from './type';
 
 /**
  * 用户登录
- * @param params 登录参数（email, password）
- * @returns 登录响应数据（access_token, refresh_token, business_tenant 等）
+ * @param params 登录参数（username, password）
+ * @returns 登录响应数据（token, user）
  */
 export const login = async (params: ILogin) => {
-  return await authService.request<LoginResponse>({
+  return blogService.request<LoginResponse>({
     method: 'POST',
-    url: '/api/user/login',
+    url: '/api/v1/auth/login',
     data: params,
-    hideErrorTip: false,
   });
 };
 
 /**
- * 用户登出
- * @description 调用后端登出接口，清除服务端 session
+ * 用户注册
+ * @param params 注册参数（username, password, email）
  * @returns Promise<void>
  */
-export const logout = async () => {
-  await authService.request<Record<string, never>>({
+export const register = async (params: IRegister) => {
+  return blogService.request<void>({
     method: 'POST',
-    url: '/api/user/logout',
-    hideErrorTip: true, // 登出失败也继续执行本地清理
+    url: '/api/v1/auth/register',
+    data: params,
   });
 };
 
 /**
  * 获取当前登录用户信息
- * @description 获取当前登录用户的详细信息，包括用户 ID、姓名、邮箱、部门、角色等
- * @returns Promise<UserInfo> 用户信息对象
+ * @returns 当前用户信息
  */
 export const getMe = async () => {
-  return await authService.get<UserInfo>('/api/user/me');
+  return blogService.request<UserInfo>({
+    method: 'GET',
+    url: '/api/v1/auth/me',
+  });
 };
+
+

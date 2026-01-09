@@ -1,45 +1,37 @@
+/**
+ * 登录请求参数（匹配 Go dto.LoginRequest）
+ */
 export interface ILogin {
-  email: string;
+  username: string;
   password: string;
 }
 
 /**
- * 业务租户信息
+ * 注册请求参数（匹配 Go dto.RegisterRequest）
  */
-export interface BusinessTenant {
-  business_tenant_key: string;
-  business_tenant_name: string;
-  id: number;
+export interface IRegister {
+  username: string;
+  password: string;
+  email: string;
 }
 
 /**
- * 登录响应数据
- */
-export interface LoginResponse {
-  access_token: string;
-  refresh_token: string;
-  business_tenant: BusinessTenant;
-  tenant_redirect_uri: string;
-}
-
-/**
- * 用户信息
+ * 用户信息（匹配 Go model.User）
  */
 export interface UserInfo {
-  /** 用户 ID */
-  user_id: number;
-  /** 用户名称 */
-  user_name: string;
-  /** 邮箱 */
+  id: number;
+  username: string;
   email: string;
-  /** 手机号 */
-  phone_number: string;
-  /** 部门 */
-  department: string;
-  /** 业务单元 */
-  bu: string;
-  /** 职位 */
-  job_title: string;
-  /** 角色名称列表 */
-  role_names: string[];
+  avatar: string;
+  created_at: string;
+  updated_at: string;
 }
+
+/**
+ * 登录响应数据（匹配 Go dto.LoginResponse）
+ */
+export interface LoginResponse {
+  token: string;
+  user: UserInfo;
+}
+
