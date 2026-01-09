@@ -37,5 +37,3 @@ export const getMe = async () => {
     url: '/api/v1/auth/me',
   });
 };
-
-

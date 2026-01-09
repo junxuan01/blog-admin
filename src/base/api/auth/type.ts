@@ -34,4 +34,3 @@ export interface LoginResponse {
   token: string;
   user: UserInfo;
 }
-
