@@ -37,3 +37,14 @@ export const getMe = async () => {
     url: '/api/v1/auth/me',
   });
 };
+
+/**
+ * 用户登出
+ * @returns Promise<void>
+ */
+export const logout = async () => {
+  return blogService.request<void>({
+    method: 'POST',
+    url: '/api/v1/auth/logout',
+  });
+};

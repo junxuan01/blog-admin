@@ -12,6 +12,8 @@ import { QueryProvider } from './QueryProvider';
  * Ant Design 主题配置
  */
 export const antdTheme: ThemeConfig = {
+  // 所有组件都使用size=small 作为默认尺寸
+
   token: {
     // colorPrimary: "#007066",
     controlItemBgHover: '#E6F4FF',

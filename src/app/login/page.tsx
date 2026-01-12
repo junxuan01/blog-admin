@@ -1,40 +1,37 @@
 'use client';
 
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
+import { ProForm, ProFormText } from '@ant-design/pro-components';
 import { login } from '@api/auth';
+import type { ILogin } from '@api/auth/type';
 import { useAuthStore } from '@stores/index';
-import { App, Button, Card, Form, Input } from 'antd';
+import { useMutation } from '@tanstack/react-query';
+import { App, Button, Card } from 'antd';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
-
-interface LoginFormValues {
-  username: string;
-  password: string;
-}
 
 export default function LoginPage() {
-  const [form] = Form.useForm<LoginFormValues>();
-  const [loading, setLoading] = useState(false);
   const { message } = App.useApp();
   const router = useRouter();
   const setToken = useAuthStore(state => state.setToken);
 
-  const handleLogin = async (values: LoginFormValues) => {
-    setLoading(true);
-    try {
-      const response = await login(values);
+  const loginMutation = useMutation({
+    mutationFn: (values: ILogin) => login(values),
+    onSuccess: response => {
       setToken(response.token);
       message.success('登录成功！');
       router.push('/user');
-    } catch (error: any) {
+    },
+    onError: (error: any) => {
       message.error(error?.message || '登录失败，请检查用户名和密码');
-    } finally {
-      setLoading(false);
-    }
+    },
+  });
+
+  const handleLogin = async (values: ILogin) => {
+    await loginMutation.mutateAsync(values);
   };
 
   return (
-    <div className='flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100'>
+    <div className='flex items-center justify-center min-h-screen'>
       <Card
         className='w-full max-w-md shadow-2xl'
         title={
@@ -44,61 +41,63 @@ export default function LoginPage() {
           </div>
         }
       >
-        <Form
-          form={form}
-          name='login'
+        <ProForm
           onFinish={handleLogin}
-          autoComplete='off'
-          size='large'
+          submitter={{
+            searchConfig: {
+              submitText: '登录',
+            },
+            render: (_, dom) => (
+              <Button
+                type='primary'
+                htmlType='submit'
+                loading={loginMutation.isPending}
+                block
+                className='h-12 text-lg font-medium'
+                onClick={() => dom[0]}
+              >
+                登录
+              </Button>
+            ),
+          }}
           layout='vertical'
+          autoFocusFirstInput
         >
-          <Form.Item
+          <ProFormText
             name='username'
             label='用户名'
+            placeholder='请输入用户名'
+            fieldProps={{
+              prefix: <UserOutlined className='text-gray-400' />,
+              autoComplete: 'username',
+              size: 'large',
+            }}
             rules={[{ required: true, message: '请输入用户名' }]}
-          >
-            <Input
-              prefix={<UserOutlined className='text-gray-400' />}
-              placeholder='请输入用户名'
-              autoComplete='username'
-            />
-          </Form.Item>
+          />
 
-          <Form.Item
+          <ProFormText.Password
             name='password'
             label='密码'
+            placeholder='请输入密码'
+            fieldProps={{
+              prefix: <LockOutlined className='text-gray-400' />,
+              autoComplete: 'current-password',
+              size: 'large',
+            }}
             rules={[{ required: true, message: '请输入密码' }]}
+          />
+        </ProForm>
+
+        <div className='text-center text-gray-500 text-sm mt-4'>
+          还没有账号？
+          <Button
+            type='link'
+            onClick={() => router.push('/register')}
+            className='p-0 ml-1'
           >
-            <Input.Password
-              prefix={<LockOutlined className='text-gray-400' />}
-              placeholder='请输入密码'
-              autoComplete='current-password'
-            />
-          </Form.Item>
-
-          <Form.Item>
-            <Button
-              type='primary'
-              htmlType='submit'
-              loading={loading}
-              block
-              className='h-12 text-lg font-medium'
-            >
-              登录
-            </Button>
-          </Form.Item>
-
-          <div className='text-center text-gray-500 text-sm mt-4'>
-            还没有账号？
-            <Button
-              type='link'
-              onClick={() => router.push('/register')}
-              className='p-0 ml-1'
-            >
-              立即注册
-            </Button>
-          </div>
-        </Form>
+            立即注册
+          </Button>
+        </div>
       </Card>
     </div>
   );

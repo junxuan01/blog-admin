@@ -19,16 +19,18 @@ export default function UsersPage() {
   const formRef = useRef<BaseTableSearchForm>(undefined);
   // const { handleDataSourceChange } = useDetailNavigate('orders');
 
-  // 表格列配置（用户）
+  // 表格列配置
   const columns: BaseTableProps<UserListItem>['columns'] = [
     {
       title: 'ID',
       dataIndex: 'id',
       width: 80,
+      hideInSearch: true,
     },
     {
       title: 'Username',
       dataIndex: 'username',
+      hideInSearch: true,
       render: (_, record) => (
         <Link
           href={`#/users/${record.id}`}
@@ -42,10 +44,12 @@ export default function UsersPage() {
       title: 'Email',
       dataIndex: 'email',
       width: 240,
+      hideInSearch: true,
     },
     {
       title: 'Created At',
       dataIndex: 'created_at',
+      hideInSearch: true,
       render: (_, record) =>
         record.created_at
           ? dayjs(record.created_at).format('YYYY-MM-DD HH:mm')
@@ -55,6 +59,7 @@ export default function UsersPage() {
       title: 'Actions',
       key: 'actions',
       width: 120,
+      hideInSearch: true,
       render: (_, record) => (
         <Space>
           <Tooltip title='View'>
@@ -66,13 +71,11 @@ export default function UsersPage() {
         </Space>
       ),
     },
-  ];
-
-  // 搜索列配置
-  const searchColumns: BaseTableProps<UserListItem>['searchColumns'] = [
+    // 搜索字段
     {
       title: 'Search',
       dataIndex: 'keyword',
+      hideInTable: true,
       valueType: 'text',
       fieldProps: {
         placeholder: 'Username or email',
@@ -87,7 +90,6 @@ export default function UsersPage() {
           actionRef={actionRef}
           formRef={formRef}
           columns={columns}
-          searchColumns={searchColumns}
           request={async ({ pageSize, current, ...rest }) => {
             const params = {
               page: current ?? 1,
@@ -97,6 +99,7 @@ export default function UsersPage() {
 
             // 调用后端用户列表接口
             const data = await getUsers(params);
+
             return {
               success: true,
               total: data?.total ?? 0,

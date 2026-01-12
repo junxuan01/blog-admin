@@ -129,7 +129,7 @@ export default function MainLayout({
       }}
       breadcrumbRender={false}
       avatarProps={{
-        title: <span className='text-white'>{userInfo?.user_name}</span>,
+        title: <span className='text-white'>{userInfo?.username}</span>,
         icon: <Image src={AvatarImage} alt='Avatar' width={24} height={24} />,
         style: { backgroundColor: '#87d068' },
         render: (_props, dom) => {

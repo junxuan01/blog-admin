@@ -1,5 +1,4 @@
 import type { ParamsType, ProTableProps } from '@ant-design/pro-components';
-import type { CusProComponentsType } from '../pro-components';
 
 /**
  * BaseTable 组件属性类型
@@ -7,13 +6,8 @@ import type { CusProComponentsType } from '../pro-components';
 export type BaseTableProps<
   DataType extends Record<string, any> = any,
   Params extends ParamsType = ParamsType,
-  ValueType = CusProComponentsType,
+  ValueType = 'text',
 > = ProTableProps<DataType, Params, ValueType> & {
-  /**
-   * 搜索列配置（只在搜索表单中显示）
-   */
-  searchColumns?: ProTableProps<DataType, Params, ValueType>['columns'];
-
   /**
    * 搜索表单提交前的数据处理
    */

@@ -31,9 +31,9 @@ export const useGetMe = (): UseGetMeReturn => {
       setUserInfo(userInfo);
       return userInfo;
     },
-    staleTime: 1 * 60 * 1000, // 1分钟
+    staleTime: 0, // 1分钟
     retry: false, // 请求失败不重试，避免无限重试
-    refetchOnWindowFocus: false, // 切换窗口不重新请求
+    refetchOnWindowFocus: true, // 切换窗口不重新请求
   });
 
   return {
