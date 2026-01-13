@@ -391,7 +391,7 @@ export class Request<DefaultReturnData extends boolean = true> {
       this.onUnauthorized();
     } else {
       // 默认行为：跳转到登录页
-      window.location.href = '/login';
+      // window.location.href = '/login';
     }
   }
 

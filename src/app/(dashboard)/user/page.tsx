@@ -33,8 +33,9 @@ export default function UsersPage() {
       hideInSearch: true,
       render: (_, record) => (
         <Link
-          href={`#/users/${record.id}`}
+          href={`/users/${record.id}`}
           className='text-blue-600 font-medium'
+          prefetch={true}
         >
           {record.username}
         </Link>
@@ -63,10 +64,9 @@ export default function UsersPage() {
       render: (_, record) => (
         <Space>
           <Tooltip title='View'>
-            <Button
-              icon={<EyeOutlined />}
-              onClick={() => window.open(`/users/${record.id}`, '_blank')}
-            />
+            <Link href={`/users/${record.id}`} target='_blank' prefetch={true}>
+              <Button icon={<EyeOutlined />} />
+            </Link>
           </Tooltip>
         </Space>
       ),

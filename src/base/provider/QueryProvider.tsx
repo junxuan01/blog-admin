@@ -10,17 +10,18 @@ export const QueryProvider = ({ children }: { children: React.ReactNode }) => {
       new QueryClient({
         defaultOptions: {
           queries: {
-            // 默认配置：适合大多数业务数据
-            staleTime: 0, // ✅ 数据立即过期，确保总是获取最新数据
-            gcTime: 1000 * 60 * 5, // 5分钟：缓存保留时间，用于快速返回
+            // Admin 后台优化配置
+            staleTime: 1000 * 60 * 3, // 3分钟：数据在3分钟内视为新鲜，减少不必要的请求
+            gcTime: 1000 * 60 * 10, // 10分钟：缓存保留时间，提供更好的前进/后退体验
             retry: false, // 失败不重试（避免请求失败时无限重试）
-            refetchOnWindowFocus: false, // 切回标签页时不自动刷新
-            refetchOnReconnect: false, // 网络重连时不自动刷新（避免频繁刷新）
+            refetchOnWindowFocus: false, // 切回标签页时不自动刷新（Admin 后台通常不需要）
+            refetchOnReconnect: false, // 网络重连时不自动刷新
 
             // 说明：
-            // - staleTime: 0 意味着数据"立即过期"，每次使用时都会后台重新请求
-            // - gcTime: 5分钟 意味着即使过期，缓存仍保留5分钟，用于瞬间切换页面时显示旧数据（避免白屏）
-            // - 如需某些查询在切回页面时刷新，可在具体的 useQuery 中传入 { refetchOnWindowFocus: true }
+            // - staleTime: 3分钟 意味着数据在3分钟内认为是"新鲜的"，不会后台重新请求
+            // - gcTime: 10分钟 意味着缓存保留10分钟，便于在标签页间快速切换
+            // - 对于需要实时数据的查询，可在具体的 useQuery 中覆盖：{ staleTime: 0, refetchOnWindowFocus: true }
+            // - 对于很少变化的数据（如字典、配置），可设置更长的 staleTime
           },
           mutations: {
             retry: 0, // mutation 不重试，失败立即报错
