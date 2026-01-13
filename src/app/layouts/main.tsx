@@ -45,6 +45,11 @@ const menuItems: MenuDataItem[] = [
     icon: <UserOutlined />,
   },
   {
+    path: '/article',
+    name: 'Article',
+    icon: <UserOutlined />,
+  },
+  {
     path: '/corporate-profile',
     name: 'Corporate Profile',
     icon: <CorporateProfileMenuIcon />,

@@ -33,9 +33,10 @@ export const QueryProvider = ({ children }: { children: React.ReactNode }) => {
   return (
     <QueryClientProvider client={queryClient}>
       {children}
-      {process.env.NODE_ENV === 'development' && (
+      {/* 暂时禁用 DevTools 以提升性能 */}
+      {/* {process.env.NODE_ENV === 'development' && (
         <ReactQueryDevtools initialIsOpen={false} />
-      )}
+      )} */}
     </QueryClientProvider>
   );
 };
