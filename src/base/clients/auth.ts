@@ -1,6 +1,6 @@
 import { TENANT_KEY } from '@const/auth';
+import { Request } from '@junxuan/requests';
 import { useAuthStore } from '@stores/index';
-import { Request } from '@utils/request/index';
 
 /**
  * Auth Service
@@ -32,6 +32,7 @@ const authService = new Request({
 
     return config;
   },
+  onUnauthorized() {},
 });
 
 export default authService;

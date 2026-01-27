@@ -1,5 +1,5 @@
+import { Request } from '@junxuan/requests';
 import { useAuthStore } from '@stores/index';
-import { Request } from '@utils/request/index';
 
 /**
  * Blog Service
